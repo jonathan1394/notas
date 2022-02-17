@@ -8,3 +8,9 @@ background: linear-gradient(to right, #1D2671, #C33764); /* W3C, IE 10+/ Edge, F
 .jumbotron{
     background:none;
 }
+#footer {
+        font-family: sans-serif;
+        width: 100%;
+        bottom: 0;
+        position:fixed;
+    }

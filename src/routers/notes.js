@@ -17,10 +17,9 @@ router.post('/notas/New-notes', async (req, res)=>{
     }
     if(error.length>0){
         res.render('notas/New-notes',{
-            error,
             title,
             descripcion,
-        });
+            error});
     }else{
         const NewNote = new Note({title,descripcion});
         await NewNote.save();
@@ -37,21 +36,22 @@ router.get('/notas',async(req, res) => {
 
 
 router.get('/notas/edit/:id',async (req, res)=>{
+    
     const Nota = await Note.findById(req.params.id);
     res.render('notas/Edit-Note',{Nota});
 });
 
 router.put('/notas/Edit-Note/:id',async (req, res)=>{
-    const {title,descripcion}=req.body;
+    const {title,descripcion}=req.body; 
     await Note.findByIdAndUpdate(req.params.id,{title, descripcion});
     req.flash('success_msg','Nota Editada Correctamente');
     res.redirect('/notas');
-})
+});
 
 router.delete('/notas/delete/:id',async (req, res)=>{
     await Note.findByIdAndDelete(req.params.id);
     req.flash('success_msg','Nota Eliminada Correctamente');
     res.redirect('/notas');
-})
+});
 
 module.exports = router;
